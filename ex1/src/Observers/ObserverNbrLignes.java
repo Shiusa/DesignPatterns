@@ -1,6 +1,6 @@
 package Observers;
 
-public class ObserverNbrLignes implements Observer {
+public class ObserverNbrLignes implements ObserverLigne {
 
   int nombreLignes = 0;
 
@@ -13,7 +13,7 @@ public class ObserverNbrLignes implements Observer {
   }
 
   @Override
-  public void traiterLigne() {
-    setNombreLignes(nombreLignes++);
+  public void traiterLigne(String ligneLu) {
+    nombreLignes++;
   }
 }

@@ -1,6 +1,6 @@
 package Observers;
 
-public class OberserverNbrMots implements Observer {
+public class ObserverNbrMots implements ObserverMot {
 
   int nombreMots = 0;
 
@@ -13,7 +13,7 @@ public class OberserverNbrMots implements Observer {
   }
 
   @Override
-  public void traiterLigne() {
-
+  public void traiterMot(String motLu) {
+    nombreMots++;
   }
 }
