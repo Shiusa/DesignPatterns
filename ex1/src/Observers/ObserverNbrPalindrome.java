@@ -15,7 +15,7 @@ public class ObserverNbrPalindrome implements ObserverMot {
   @Override
   public void traiterMot(String motLu) {
     StringBuffer tmp = new StringBuffer(motLu);
-    if (motLu.equals(tmp.reverse().toString())) {
+    if (motLu.equals(tmp.reverse().toString()) && motLu.length()>1) {
       nombrePalindrome++;
     }
   }
