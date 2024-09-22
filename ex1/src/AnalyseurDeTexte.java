@@ -25,18 +25,33 @@ public class AnalyseurDeTexte {
 		String ligne;
 		//int nbrMots = 0, nbrLignes = 0, nbrPalindromes = 0, nbrBelgique = 0;
 		try {
-			lecteurAvecBuffer = new BufferedReader(new FileReader(args[0]));
+			String chemin = "test.txt";
+			lecteurAvecBuffer = new BufferedReader(new FileReader(chemin));
+			//lecteurAvecBuffer = new BufferedReader(new FileReader(args[0]));
+			while ((ligne = lecteurAvecBuffer.readLine()) != null) {
+
+				notifier.notifyObserverLigne(ligne);
+
+				for (String mot:ligne.trim().split(" ")) {
+					notifier.notifyObserverMot(mot);
+				}
+
+			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Erreur d'ouverture");
+			System.out.println("Erreur d'ouverture" + e.getMessage());
+		} finally {
+			if (lecteurAvecBuffer != null) {
+				lecteurAvecBuffer.close();
+			}
 		}
-		while ((ligne = lecteurAvecBuffer.readLine()) != null) {
+		/*while ((ligne = lecteurAvecBuffer.readLine()) != null) {
 
 			notifier.notifyObserverLigne(ligne);
 
 			for (String mot:ligne.trim().split(" ")) {
 				notifier.notifyObserverMot(mot);
 			}
-			/*nbrLignes++;
+			*//*nbrLignes++;
 			if (ligne.contains("Belgique")) {
 				nbrBelgique++;
 			}
@@ -46,10 +61,10 @@ public class AnalyseurDeTexte {
 				if (mot.equals(temp.reverse().toString())) {
 					nbrPalindromes++;
 				}
-			}*/
+			}*//*
 
-		}
-		lecteurAvecBuffer.close();
+		}*/
+		//lecteurAvecBuffer.close();
 		System.out.println("Il y avait " + observerNbrLignes.getNombreLignes() + " lignes.");
 		System.out.println("Il y avait " + observerNbrMots.getNombreMots() + " mots.");
 		System.out.println("Il y avait " + observerNbrPalindrome.getNombrePalindrome() + " palindromes.");
