@@ -1,5 +1,9 @@
 import Observers.ObserverLigne;
 import Observers.ObserverMot;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +37,30 @@ public class ObserverNotifier {
   public void notifyObserverMot(String mot) {
     for (ObserverMot observerMot:observerMots) {
       observerMot.traiterMot(mot);
+    }
+  }
+
+  public void readFile(String filePath) throws IOException {
+    BufferedReader lecteurAvecBuffer = null;
+    String ligne;
+    try {
+      String chemin = filePath;
+      lecteurAvecBuffer = new BufferedReader(new FileReader(chemin));
+      while ((ligne = lecteurAvecBuffer.readLine()) != null) {
+
+        notifyObserverLigne(ligne);
+
+        for (String mot:ligne.trim().split(" ")) {
+          notifyObserverMot(mot);
+        }
+
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("Erreur d'ouverture" + e.getMessage());
+    } finally {
+      if (lecteurAvecBuffer != null) {
+        lecteurAvecBuffer.close();
+      }
     }
   }
 
