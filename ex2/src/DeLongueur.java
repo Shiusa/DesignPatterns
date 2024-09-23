@@ -2,6 +2,10 @@ public class DeLongueur implements Strategy{
 
   int longueur;
 
+  public DeLongueur(int longueur) {
+    this.longueur = longueur;
+  }
+
   public int getLongueur() {
     return longueur;
   }
