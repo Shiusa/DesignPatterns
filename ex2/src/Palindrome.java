@@ -6,6 +6,6 @@ public class Palindrome implements Strategy{
       return false;
     }
     StringBuffer stringBuffer = new StringBuffer(mot);
-    return mot.equals(stringBuffer.reverse().toString());
+    return mot.equals(stringBuffer.reverse().toString())&&mot.length()>1;
   }
 }
