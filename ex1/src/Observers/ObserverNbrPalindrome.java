@@ -19,4 +19,8 @@ public class ObserverNbrPalindrome implements ObserverMot {
       nombrePalindrome++;
     }
   }
+
+  public void finFichier() {
+    System.out.println("Il y avait " + nombrePalindrome + " palindromes.");
+  }
 }

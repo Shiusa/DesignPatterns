@@ -16,4 +16,8 @@ public class ObserverNbrLignes implements ObserverLigne {
   public void traiterLigne(String ligneLu) {
     nombreLignes++;
   }
+
+  public void finFichier() {
+    System.out.println("Il y avait " + nombreLignes + " lignes.");
+  }
 }

@@ -16,4 +16,8 @@ public class ObserverNbrMots implements ObserverMot {
   public void traiterMot(String motLu) {
     nombreMots++;
   }
+
+  public void finFichier() {
+    System.out.println("Il y avait " + nombreMots + " mots.");
+  }
 }

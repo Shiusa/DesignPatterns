@@ -18,4 +18,8 @@ public class ObserverLigneBelgique implements ObserverLigne {
       nombreLigneBelgique++;
     }
   }
+
+  public void finFichier() {
+    System.out.println("Il y avait " + nombreLigneBelgique + " lignes contenant Belgique.");
+  }
 }
