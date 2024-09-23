@@ -1,3 +1,4 @@
+import Observers.ObserverMot;
 import Observers.ObserverNbrMots;
 import Observers.ObserverLigneBelgique;
 import Observers.ObserverNbrLignes;
@@ -21,7 +22,9 @@ public class AnalyseurDeTexte {
 		notifier.addObserverMot(observerNbrMots);
 		notifier.addObserverMot(observerNbrPalindrome);
 
-		BufferedReader lecteurAvecBuffer = null;
+		notifier.readFile("test.txt");
+
+		/*BufferedReader lecteurAvecBuffer = null;
 		String ligne;
 		//int nbrMots = 0, nbrLignes = 0, nbrPalindromes = 0, nbrBelgique = 0;
 		try {
@@ -43,7 +46,7 @@ public class AnalyseurDeTexte {
 			if (lecteurAvecBuffer != null) {
 				lecteurAvecBuffer.close();
 			}
-		}
+		}*/
 		/*while ((ligne = lecteurAvecBuffer.readLine()) != null) {
 
 			notifier.notifyObserverLigne(ligne);
@@ -65,10 +68,14 @@ public class AnalyseurDeTexte {
 
 		}*/
 		//lecteurAvecBuffer.close();
-		System.out.println("Il y avait " + observerNbrLignes.getNombreLignes() + " lignes.");
+		observerNbrLignes.finFichier();
+		observerNbrMots.finFichier();
+		observerNbrPalindrome.finFichier();
+		observerLigneBelgique.finFichier();
+		/*System.out.println("Il y avait " + observerNbrLignes.getNombreLignes() + " lignes.");
 		System.out.println("Il y avait " + observerNbrMots.getNombreMots() + " mots.");
 		System.out.println("Il y avait " + observerNbrPalindrome.getNombrePalindrome() + " palindromes.");
-		System.out.println("Il y avait " + observerLigneBelgique.getNombreLigneBelgique() + " lignes contenant Belgique.");
+		System.out.println("Il y avait " + observerLigneBelgique.getNombreLigneBelgique() + " lignes contenant Belgique.");*/
 		/*System.out.println("Il y avait " + nbrLignes + " lignes.");
 		System.out.println("Il y avait " + nbrMots + " mots.");
 		System.out.println("Il y avait " + nbrPalindromes + " palindromes.");
