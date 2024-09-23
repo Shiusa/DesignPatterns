@@ -68,10 +68,6 @@ public class AnalyseurDeTexte {
 
 		}*/
 		//lecteurAvecBuffer.close();
-		observerNbrLignes.finFichier();
-		observerNbrMots.finFichier();
-		observerNbrPalindrome.finFichier();
-		observerLigneBelgique.finFichier();
 		/*System.out.println("Il y avait " + observerNbrLignes.getNombreLignes() + " lignes.");
 		System.out.println("Il y avait " + observerNbrMots.getNombreMots() + " mots.");
 		System.out.println("Il y avait " + observerNbrPalindrome.getNombrePalindrome() + " palindromes.");

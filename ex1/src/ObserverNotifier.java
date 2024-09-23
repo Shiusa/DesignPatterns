@@ -55,6 +55,12 @@ public class ObserverNotifier {
         }
 
       }
+      for (ObserverLigne observerLigne:observerLignes) {
+        observerLigne.finFichier();
+      }
+      for (ObserverMot observerMot:observerMots) {
+        observerMot.finFichier();
+      }
     } catch (FileNotFoundException e) {
       System.out.println("Erreur d'ouverture" + e.getMessage());
     } finally {
