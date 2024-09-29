@@ -7,12 +7,12 @@ public class Main {
     ListerMot listerMot = new ListerMot("test.txt");
 
     CommencePartT commencePartT = new CommencePartT();
-    DeLongueur deLongueur = new DeLongueur(3);
+    DeLongueur deLongueur = new DeLongueur(5);
     //deLongueur.setLongueur(3);
     Palindrome palindrome = new Palindrome();
 
     //listerMot.imprimerSi(new Not(deLongueur,commencePartT));
-    listerMot.imprimerSi(new Et(commencePartT,deLongueur,palindrome));
+    listerMot.imprimerSi(new Ou(commencePartT,deLongueur,palindrome));
 
   }
 
