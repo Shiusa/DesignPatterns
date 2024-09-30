@@ -1,4 +1,4 @@
-public class DVDFactory implements ProduitFactory {
+public class DVDProduitFactory implements ProduitFactory {
 
   @Override
   public DVD creerProduit(String name, int anneeDeParution) {

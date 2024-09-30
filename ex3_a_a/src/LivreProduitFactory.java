@@ -1,4 +1,4 @@
-public class LivreFactory implements ProduitFactory {
+public class LivreProduitFactory implements ProduitFactory {
 
   @Override
   public Livre creerProduit(String name, int anneeDeParution) {
