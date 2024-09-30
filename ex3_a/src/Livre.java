@@ -1,5 +1,5 @@
 
-public class Livre {
+public class Livre implements Produit {
 	public static final double PRIX=14.99;
 	private String name;
 	private int anneeDeParution;
@@ -18,7 +18,7 @@ public class Livre {
 	public double getPrix() {
 		return prix;
 	}
-	public void setPrix(int prix){
+	public void setPrix(double prix){
 		this.prix=prix;
 	}
 	
