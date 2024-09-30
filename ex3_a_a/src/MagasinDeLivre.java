@@ -3,10 +3,11 @@ import java.util.Map;
 
 public class MagasinDeLivre extends Magasin {
 	private Map<String,Livre> etagere= new HashMap<String,Livre>();
+	private LivreFactory livreFactory = new LivreFactory();
 
 	@Override
 	public Livre creerProduit(String name, int anneDeParution) {
-		return new Livre(name,anneDeParution);
+		return livreFactory.creerProduit(name, anneDeParution);
 	}
 
 	@Override

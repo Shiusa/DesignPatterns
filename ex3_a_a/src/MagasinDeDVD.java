@@ -4,10 +4,11 @@ import java.util.Map;
 
 public class MagasinDeDVD extends Magasin {
 	private Map<String,DVD> bac= new HashMap<String,DVD>();
+	private DVDFactory dvdFactory = new DVDFactory();
 
 	@Override
 	public DVD creerProduit(String name, int anneDeParution) {
-		return new DVD(name,anneDeParution);
+		return dvdFactory.creerProduit(name, anneDeParution);
 	}
 
 	@Override
