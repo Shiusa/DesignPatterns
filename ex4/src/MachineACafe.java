@@ -1,4 +1,86 @@
 public class MachineACafe {
+
+	public enum State {
+		INACTIF{
+			@Override
+			public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
+				machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()+piece.getValeur());
+				machineACafe.afficherMontant();
+				machineACafe.setState(State.COLLECTE);
+			}
+
+			@Override
+			public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
+				machineACafe.afficherPasAssez(toucheBoisson);
+				machineACafe.setState(State.PAS_ASSEZ);
+			}
+
+			@Override
+			public void rendreMonnaie(MachineACafe machineACafe) {
+				machineACafe.setState(State.INACTIF);
+			}
+		},
+		COLLECTE{
+			@Override
+			public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
+				machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()+piece.getValeur());
+				machineACafe.afficherMontant();
+			}
+
+			@Override
+			public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
+				if (toucheBoisson.getPrix()> machineACafe.getMontantEnCours()) {
+					machineACafe.afficherPasAssez(toucheBoisson);
+					machineACafe.setState(State.PAS_ASSEZ);
+				}
+			}
+
+			@Override
+			public void rendreMonnaie(MachineACafe machineACafe) {
+				machineACafe.afficherRetour();
+				machineACafe.setMontantEnCours(0);
+				machineACafe.setBoisson(null);
+				machineACafe.setState(State.INACTIF);
+			}
+		},
+		PAS_ASSEZ{
+			@Override
+			public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
+				machineACafe.setState(State.COLLECTE);
+			}
+
+			@Override
+			public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
+				throw new IllegalStateException();
+			}
+
+			@Override
+			public void rendreMonnaie(MachineACafe machineACafe) {
+				machineACafe.afficherRetour();
+				machineACafe.setMontantEnCours(0);
+				machineACafe.setBoisson(null);
+				machineACafe.setState(State.INACTIF);
+			}
+		};
+
+		public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
+			machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()+piece.getValeur());
+			machineACafe.afficherMontant();
+			machineACafe.setState(State.COLLECTE);
+		}
+
+		public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
+			machineACafe.afficherPasAssez(toucheBoisson);
+			machineACafe.setState(State.PAS_ASSEZ);
+		}
+
+		public void rendreMonnaie(MachineACafe machineACafe) {
+			machineACafe.setState(State.INACTIF);
+		}
+
+	}
+
+	private State state;
 	public final int idle = 0;
 	public final int collecte = 1;
 	public final int pasAssez = 2;
@@ -6,7 +88,35 @@ public class MachineACafe {
 	private int montantEnCours = 0;
 	private int etatCourant = idle;
 	private ToucheBoisson boisson = null;
-	
+
+	public MachineACafe() {
+		setState(State.INACTIF);
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public int getMontantEnCours() {
+		return montantEnCours;
+	}
+
+	public ToucheBoisson getBoisson() {
+		return boisson;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public void setMontantEnCours(int montantEnCours) {
+		this.montantEnCours = montantEnCours;
+	}
+
+	public void setBoisson(ToucheBoisson boisson) {
+		this.boisson = boisson;
+	}
+
 	public void afficherMontant() {
 		System.out.println(montantEnCours + " cents disponibles");
 	}
@@ -25,7 +135,11 @@ public class MachineACafe {
 		
 	}
 
-	public void entrerMonnaie(Piece piece) {
+	public void entrerMonnaie() {
+		state.entrerMonnaie(this);
+	}
+
+	/*public void entrerMonnaie(Piece piece) {
 		montantEnCours += piece.getValeur();
 		afficherMontant();
 		if ( etatCourant != pasAssez)
@@ -42,9 +156,13 @@ public class MachineACafe {
 			else
 				etatCourant =  collecte;
 		}
+	}*/
+
+	public void selectionnerBoisson() {
+		state.selectionnerBoisson(this);
 	}
-	
-	public void selectionnerBoisson(ToucheBoisson toucheBoisson) {
+
+	/*public void selectionnerBoisson(ToucheBoisson toucheBoisson) {
 		if (etatCourant == pasAssez)
 			throw new IllegalStateException();
 		if (etatCourant == idle) {
@@ -65,14 +183,18 @@ public class MachineACafe {
 			etatCourant = idle;
 		else
 			etatCourant = collecte;
-	}
-	
+	}*/
+
 	public void rendreMonnaie() {
+		state.rendreMonnaie(this);
+	}
+
+	/*public void rendreMonnaie() {
 		if (etatCourant != idle) {
 			afficherRetour();
 			montantEnCours = 0;
 			boisson = null;
 		}
 		etatCourant = idle;
-	}
+	}*/
 }
