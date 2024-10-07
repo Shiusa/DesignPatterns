@@ -2,7 +2,7 @@ public class MachineACafe {
 
 	public enum State {
 		INACTIF{
-			@Override
+			/*@Override
 			public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
 				machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()+piece.getValeur());
 				machineACafe.afficherMontant();
@@ -18,7 +18,7 @@ public class MachineACafe {
 			@Override
 			public void rendreMonnaie(MachineACafe machineACafe) {
 				machineACafe.setState(State.INACTIF);
-			}
+			}*/
 		},
 		COLLECTE{
 			@Override
@@ -31,7 +31,17 @@ public class MachineACafe {
 			public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
 				if (toucheBoisson.getPrix()> machineACafe.getMontantEnCours()) {
 					machineACafe.afficherPasAssez(toucheBoisson);
+					machineACafe.setBoisson(toucheBoisson);
 					machineACafe.setState(State.PAS_ASSEZ);
+				} else {
+					machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()-toucheBoisson.getPrix());
+					machineACafe.afficherBoisson(toucheBoisson);
+					machineACafe.afficherMontant();
+					if (machineACafe.getMontantEnCours() == 0) {
+						machineACafe.setState(State.INACTIF);
+					} else {
+						machineACafe.setState(State.COLLECTE);
+					}
 				}
 			}
 
@@ -46,6 +56,8 @@ public class MachineACafe {
 		PAS_ASSEZ{
 			@Override
 			public void entrerMonnaie(MachineACafe machineACafe, Piece piece) {
+				machineACafe.setMontantEnCours(machineACafe.getMontantEnCours()+piece.getValeur());
+				machineACafe.afficherMontant();
 				machineACafe.setState(State.COLLECTE);
 			}
 
@@ -71,7 +83,7 @@ public class MachineACafe {
 
 		public void selectionnerBoisson(MachineACafe machineACafe, ToucheBoisson toucheBoisson) {
 			machineACafe.afficherPasAssez(toucheBoisson);
-			machineACafe.setState(State.PAS_ASSEZ);
+			//machineACafe.setState(State.PAS_ASSEZ);
 		}
 
 		public void rendreMonnaie(MachineACafe machineACafe) {
@@ -81,12 +93,12 @@ public class MachineACafe {
 	}
 
 	private State state;
-	public final int idle = 0;
+	/*public final int idle = 0;
 	public final int collecte = 1;
-	public final int pasAssez = 2;
+	public final int pasAssez = 2;*/
 	
 	private int montantEnCours = 0;
-	private int etatCourant = idle;
+	//private int etatCourant = idle;
 	private ToucheBoisson boisson = null;
 
 	public MachineACafe() {
@@ -135,8 +147,8 @@ public class MachineACafe {
 		
 	}
 
-	public void entrerMonnaie() {
-		state.entrerMonnaie(this);
+	public void entrerMonnaie(Piece piece) {
+		state.entrerMonnaie(this, piece);
 	}
 
 	/*public void entrerMonnaie(Piece piece) {
@@ -158,8 +170,8 @@ public class MachineACafe {
 		}
 	}*/
 
-	public void selectionnerBoisson() {
-		state.selectionnerBoisson(this);
+	public void selectionnerBoisson(ToucheBoisson toucheBoisson) {
+		state.selectionnerBoisson(this, toucheBoisson);
 	}
 
 	/*public void selectionnerBoisson(ToucheBoisson toucheBoisson) {
