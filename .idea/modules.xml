@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/LogicielDessinAbstractFactory/LogicielDessinAbstractFactory.iml" filepath="$PROJECT_DIR$/LogicielDessinAbstractFactory/LogicielDessinAbstractFactory.iml" />
       <module fileurl="file://$PROJECT_DIR$/LogicielDessinFactoryMethod/LogicielDessinFactoryMethod.iml" filepath="$PROJECT_DIR$/LogicielDessinFactoryMethod/LogicielDessinFactoryMethod.iml" />
       <module fileurl="file://$PROJECT_DIR$/LogicielID/LogicielID.iml" filepath="$PROJECT_DIR$/LogicielID/LogicielID.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StateDesignPattern/StateDesignPattern.iml" filepath="$PROJECT_DIR$/StateDesignPattern/StateDesignPattern.iml" />
       <module fileurl="file://$PROJECT_DIR$/ex1/ex1.iml" filepath="$PROJECT_DIR$/ex1/ex1.iml" />
       <module fileurl="file://$PROJECT_DIR$/ex2/ex2.iml" filepath="$PROJECT_DIR$/ex2/ex2.iml" />
       <module fileurl="file://$PROJECT_DIR$/ex2_2/ex2_2.iml" filepath="$PROJECT_DIR$/ex2_2/ex2_2.iml" />
